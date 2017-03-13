@@ -83,4 +83,29 @@ function Vector(x, y, z) { 
   };
 }
 
-function Ray(origin, direction) { this.origin = origin; this.direction = direction; this.length = function() {  return this.direction.sub(this.origin).length(); }}function Sphere(center, radius, color) { this.center = center; this.radius = radius; this.color = color; this.intersects = function(ray) {  var b = this.center.sub(ray.origin);  var t = ray.direction.dot(b);  var p = ray.origin.add(ray.direction.mult(t));  var d = this.center.sub(p);  if (d.length() <= this.radius)  {   return true;   console.log(ray.direction);  }  return false; };}
+function Ray(origin, direction) {
+  this.origin = origin; 
+  this.direction = direction; 
+  
+  this.length = function() {  
+    return this.direction.sub(this.origin).length(); 
+  }
+}
+
+function Sphere(center, radius, color) { 
+  this.center = center; 
+  this.radius = radius; 
+  this.color = color; 
+  
+  this.intersects = function(ray) {  
+    var b = this.center.sub(ray.origin);  
+    var t = ray.direction.dot(b);  
+    var p = ray.origin.add(ray.direction.mult(t));  
+    var d = this.center.sub(p);  
+    if (d.length() <= this.radius)  {   
+      return true;   
+      console.log(ray.direction);  
+    }  
+    return false
+  };
+};
