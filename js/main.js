@@ -112,6 +112,24 @@ function Sphere(center, radius, color) { 
     return false
   };
 };
+
+function Triangle(p1, p2, p3) {
+ this.p1 = p1;
+ this.p2 = p2;
+ this.p3 = p3;
+ this.normal = function() { 
+		var v = this.pos2.sub(this.pos1);
+		var w = this.pos3.sub(this.pos1);
+		var x = v.y * w.z - v.z * w.y;
+		var y = v.z * w.x - v.x * w.z;
+		var z = v.x * w.y - v.y * w.x;
+		return new Vector(x, y, z).normalized();
+	};
+ this.intersects = function(ray) {
+		
+	};
+}
+
 function Cube(pos1, pos2, color) {
   this.pos1 = pos1;
   this.pos2 = pos2;
