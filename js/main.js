@@ -4,8 +4,11 @@ var ctx = canvas.getContext("2d");
 var cam = new Vector(0, 0, 0);
 
 var world = [];
-world[0] = new Sphere(new Vector(0, 0, 5), 1, '#458721');
-world[1] = new Sphere(new Vector(1, 1, 10), 2, '#FF5456');
+world[0] = new Cube(new Vector(-2, -2,-5), new Vector(2, 2, -8), '#458721');
+console.log(world[0].center());
+
+//world[0] = new Sphere(new Vector(0, 0, 5), 1, '#458721');
+//world[1] = new Sphere(new Vector(1, 1, 10), 2, '#FF5456');
 
 var screen = { 
   width: 500, 
@@ -109,3 +112,28 @@ function Sphere(center, radius, color) { 
     return false
   };
 };
+function Cube(pos1, pos2, color) {
+  this.pos1 = pos1;
+  this.pos2 = pos2;
+  this.color = color;
+  this.dimensions = function() { 
+    return this.pos2.sub(this.pos1).abs(); 
+  };
+  this.center = function() { 
+    return this.dimensions().div(2).add(pos1); 
+  };
+  this.min = Math.min(this.dimensions().x, this.dimensions().y, this.dimensions().z);
+  this.min = Math.max(this.dimensions().x, this.dimensions().y, this.dimensions().z);
+  this.intersects = function(ray) {
+    var b = this.center().sub(ray.origin);
+    var t = ray.direction.dot(b);
+    var p = ray.origin.add(ray.direction.mult(t))
+    ;var d = this.center().sub(p);
+    //console.log(d.length());
+    //if (this.max / 2 < d.length())
+    //return false;if (this.min / 2 > d.length())
+    { return true;
+    }return 
+    false;
+  };
+}
